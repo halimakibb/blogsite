@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<!--
+	Striped by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+	{% load staticfiles %}
+		<title>{% block title %} {% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="{% static 'blog/assets/js/ie/html5shiv.js' %}"></script><![endif]-->
+		<link rel="stylesheet" href="{% static 'blog/assets/css/main.css' %}" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="{% static 'blog/assets/css/ie8.css' %}" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Content -->
+			<div id="content">
+				<div class="inner">
+
+					<!-- Post -->
+						{% block content %} {% endblock %}
+					
+					<!-- Pagination -->
+						<!--<div class="pagination">
+							<a href="#" class="button previous">Previous Page</a>
+							<div class="pages">
+								<a href="#" class="active">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#">4</a>
+								<span>&hellip;</span>
+								<a href="#">20</a>
+							</div>
+							<a href="#" class="button next">Next Page</a>
+						</div>
+						-->
+				</div>
+			</div>
+
+		<!-- Sidebar -->
+			<div id="sidebar">
+
+				<!-- Logo -->
+					<h1 id="logo"><a href="#">STRIPED</a></h1>
+
+				<!-- Nav -->
+				
+					<nav id="nav">
+						<ul>
+							<!--<li class="current"><a href="#">Latest Post</a></li>-->
+							{% block sidebar %} {% endblock %}
+
+						</ul>
+					</nav>
+					
+					
+
+				<!-- Search -->
+					<section class="box search">
+						<form method="post" action="#">
+							<input type="text" class="text" name="search" placeholder="Search" />
+						</form>
+					</section>
+
+				<!-- Text -->
+					<section class="box text-style1">
+						<div class="inner">
+							<p>
+								<strong>Striped:</strong> A free and fully responsive HTML5 site
+								template designed by <a href="http://n33.co/">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a>
+							</p>
+						</div>
+					</section>
+
+				<!-- Recent Posts -->
+					<section class="box recent-posts">
+						<header>
+							<h2>Recent Posts</h2>
+						</header>
+						{% block recentpost %} {% endblock %}
+					</section>
+
+				<!-- Recent Comments -->
+					<section class="box recent-comments">
+						<header>
+							<h2>Recent Comments</h2>
+						</header>
+						{% block recentcomment %} {% endblock %}
+					</section>
+
+				
+				<!-- Copyright -->
+					<ul id="copyright">
+						<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'blog/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'blog/assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'blog/assets/js/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'blog/assets/js/main.js' %}"></script>
+
+	</body>
+</html>

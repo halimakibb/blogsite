@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Session language is: {{ session_language }} {% endblock title %}
+
+{% block sidebar %}
+
+<li class="current"><a href="#">Home</a></li>
+<b><li><a href = '/blog/create'>Create Article</a></li></b>
+<b><li><a href = '/blog/login'>Login</a></li></b>
+
+{% endblock sidebar %}
+
+{% block content %}
+
+{%for article in articles %}
+
+<article class="box post post-excerpt">
+                                                        <header>
+                                                                
+                                                                <h2><a href="/blog/get/{{ article.id }}">{{ article.title }}</a></h2>
+                                                                
+                                                        </header>
+                                                        <div class="info">
+
+                                                                <span class="date"><span class="month">{{ article.published | date:"M"}}<span></span></span> <span class="day">{{ article.published | date:"d"}}</span><br><span class="year">{{ article.published | date:"Y"}}</span></span>
+                                                              
+                                                        </div>
+                                                        <a href="#" class="image featured"><img src="{% static 'blog/images/pic01.jpg' %}" alt="" /></a>
+                                                        <p>
+                                                                {{ article.body|truncatewords:10 }}
+                                                        </p>
+
+                                                </article>
+{% endfor %}
+ 
+{% endblock content %}

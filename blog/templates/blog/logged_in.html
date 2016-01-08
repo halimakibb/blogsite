@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block sidebar %} 
+
+
+<b><li><a href = '/blog/index/'>Home</a></li></b>
+<b><li><a href = '/blog/create/'>Create Article</a></li></b>
+
+{% endblock %}
+
+{% block content %}
+
+<h2> {{ full_name }} is logged in </h2>
+<p> Click <a href = '/blog/logout'>here</a> to logout.</p>
+
+{% endblock %}

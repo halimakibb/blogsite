@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} All Post {% endblock title %}
+
+{% block sidebar %}
+
+<b><li><a href = '/blog/index'>Home</a></li></b>
+<b><li><a href = '/blog/create'>Create Article</a></li></b>
+<b><li><a href = '/blog/login'>Login</a></li></b>
+
+{% endblock sidebar %}
+
+{% block content %}
+
+<article class="box post post-excerpt">
+                                                        <header>
+                                                                
+                                                                <h2><a href="/get/{{ article.id }}">{{ article.title }}</a></h2>
+                                                                
+                                                        </header>
+                                                        <div class="info">
+                                                                
+                                                                <span class="date"><span class="month">July<span></span></span> <span class="day">14</span><span class="year">, 2014</span></span>
+                                                                
+                                                        </div>
+                                                        <b><b>
+                                                        {% if article.thumbnail %}
+                                                        <p><img src = 'static/{{article.thumbnail}}' /></p>
+                                                        {% endif %}
+                                                        <p>
+                                                                {{ article.body }}
+                                                        </p>
+                                                        <p> {{ article.likes }} people liked this article </p>
+                                                        <p><a href = '/blog/like/{{article.id}}'> Like </a>
+
+                                                </article>
+ 
+{% endblock content %}
