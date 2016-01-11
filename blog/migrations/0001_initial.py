@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = []
+    dependencies = [
+        ('auth', '0008_auto_20160106_2339'),
+    ]
 
     operations = [
         migrations.CreateModel(
