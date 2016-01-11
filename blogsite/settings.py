@@ -81,8 +81,15 @@ WSGI_APPLICATION = 'blogsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {}
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'blogsite',
+        #'USER': 'postgres',
+        #'PASSWORD': 'hardrock',
+    #}
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -133,7 +140,7 @@ MEDIA_URL = '/media/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 #
-
+DATABASES['default'] =  dj_database_url.config()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
