@@ -13,11 +13,19 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -81,10 +89,10 @@ WSGI_APPLICATION = 'blogsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogsite',
-        'USER': 'postgres',
-        'PASSWORD': 'hardrock',
+        'ENGINE': 'django.db.backends.postgresql_ps',
+        #'NAME': 'blogsite',
+        #'USER': 'postgres',
+        #'PASSWORD': 'hardrock',
     }
 }
 
@@ -127,7 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 
-STATIC_URL = '/static/' 
+#STATIC_URL = '/static/' 
 
 MEDIA_ROOT = 'C:/Users/Habib/blogsite/blog/static/'
 
