@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from datetime import date
 from time import time
@@ -36,7 +36,7 @@ class UserManager(BaseUserManager):
         user.save()
         return user        
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
     email = models.EmailField(unique = True)
