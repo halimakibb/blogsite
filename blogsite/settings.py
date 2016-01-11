@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'tinymce',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'blogsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogsite',
+        'NAME': 'djangoblog',
         'USER': 'halimakibb',
         'PASSWORD': 'hardrock',
         'SERVER': 'localhost',
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTH_USER_MODEL = "blog.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -124,8 +125,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+
+STATIC_URL = '/static/' 
 
 MEDIA_ROOT = 'C:/Users/Habib/blogsite/blog/static/'
 
-media_URL = '/static/'
+MEDIA_URL = '/media/'
+
+# tiny mce
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+#
+

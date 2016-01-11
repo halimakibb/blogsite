@@ -14,9 +14,9 @@ def login(request):
     return render_to_response('blog/login.html', c)
 
 def auth_view(request):
-    username = request.POST.get('username', '')
+    email = request.POST.get('email', '')
     password = request.POST.get('password', '')
-    user = auth.authenticate(username=username, password=password)
+    user = auth.authenticate(email=email, password=password)
     
     if user is not None:
         auth.login(request, user)
@@ -25,8 +25,10 @@ def auth_view(request):
         return HttpResponseRedirect('/blog/invalid/')
 
 def loggedin(request):
+    request.session['user_id'] = request.user.id
+    request.session.set_expiry(3600)
     return render_to_response('blog/logged_in.html',
-                              {'full_name': request.user.username})
+                              {'full_name': request.user.name})
 
 def invalid_login(request):
     return render_to_response('blog/invalid.html')
@@ -36,26 +38,26 @@ def logout(request):
     return render_to_response('blog/logout.html')
 
 def articles(request):
-    language = 'en-gb'
-    session_language = 'en-gb'
-    
-    try:
-        language = request.COOKIES['lang']
-    except:
-        pass
-    try:
-        session_language = request.session['lang']
-    except:
-        pass
-    
-    return render_to_response('blog/articles.html', 
-                              {'articles': Article.objects.order_by('published').reverse()[:5],
-                               'language': language,
-                               'session_language': session_language})
+    if request.session.get('user_id'):
+        name = request.user.name
+       # request.session.set_expiry(0)
+        return render_to_response('blog/articles.html', 
+                          {'articles': Article.objects.order_by('published').reverse()[:5],
+                           'name': name})
+    else:
+        return render_to_response('blog/articles.html', 
+                                  {'articles': Article.objects.order_by('published').reverse()[:5]})
 
 def article(request, article_id = 1):
-    return render_to_response('blog/article.html', 
-                              {'article': Article.objects.get(id = article_id) })
+    if request.session.get('user_id'):
+        name = request.user.name
+        #request.session.set_expiry(0)
+        return render_to_response('blog/article.html', 
+                                  {'article': Article.objects.get(id = article_id),
+                                   'name': name})        
+    else:
+        return render_to_response('blog/article.html', 
+                                  {'article': Article.objects.get(id = article_id) })
 
 def language(request, language='en-gb'):
     response = HttpResponse('setting language to %s' % language)
@@ -67,21 +69,29 @@ def language(request, language='en-gb'):
     return response
 
 def create(request):
-    if request.POST:
-        form = ArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            
-            return HttpResponseRedirect('/blog/index')
-    else:
-        form = ArticleForm()
+    if request.session.get('user_id'):
+        if request.POST:
+            form = ArticleForm(request.POST, request.FILES)
+            if form.is_valid():
+                author = request.user
+                comment = form.save(commit = False)
+                comment.author = author
+                comment.save()
+                
+                return HttpResponseRedirect('/blog/index')
+            else:
+                return render_to_response('blog/invalid.html')
+        else:
+            form = ArticleForm()
         
-    args = {}
-    args.update(csrf(request))
-    
-    args['form'] = form
-    
-    return render_to_response('blog/create_article.html', args)
+            args = {}
+            args.update(csrf(request))
+            
+            args['form'] = form
+            
+            return render_to_response('blog/create_article.html', args)
+    else:
+        return render_to_response('blog/invalid.html')
         
 def like(request, article_id):
     if article_id:

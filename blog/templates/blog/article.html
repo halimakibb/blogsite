@@ -2,13 +2,25 @@
 
 {% load staticfiles %}
 
-{% block title %} All Post {% endblock title %}
+{% block title %} {{ article.title }} {% endblock title %}
 
 {% block sidebar %}
+
+{% if name %}
+
+<p> Hi, {{ name }} </p>
+
+<b><li><a href = '/blog/index'>Home</a></li></b>
+<b><li><a href = '/blog/create'>Create Article</a></li></b>
+<b><li><a href = '/blog/logout'>Logout</a></li></b>
+
+{% else %}
 
 <b><li><a href = '/blog/index'>Home</a></li></b>
 <b><li><a href = '/blog/create'>Create Article</a></li></b>
 <b><li><a href = '/blog/login'>Login</a></li></b>
+
+{% endif %}
 
 {% endblock sidebar %}
 
@@ -16,8 +28,10 @@
 
 <article class="box post post-excerpt">
                                                         <header>
-                                                                
+                                                                {% autoescape off %}
                                                                 <h2><a href="/get/{{ article.id }}">{{ article.title }}</a></h2>
+                                                                <p> By {{article.author.name}} </p>
+                                                                {% endautoescape %}
                                                                 
                                                         </header>
                                                         <div class="info">
@@ -25,12 +39,14 @@
                                                                 <span class="date"><span class="month">July<span></span></span> <span class="day">14</span><span class="year">, 2014</span></span>
                                                                 
                                                         </div>
-                                                        <b><b>
+                                                       
                                                         {% if article.thumbnail %}
-                                                        <p><img src = 'static/{{article.thumbnail}}' /></p>
+                                                        <p><img src = '/static/{{article.thumbnail}}' /></p>
                                                         {% endif %}
                                                         <p>
+                                                        {% autoescape off %}
                                                                 {{ article.body }}
+                                                        {% endautoescape %}
                                                         </p>
                                                         <p> {{ article.likes }} people liked this article </p>
                                                         <p><a href = '/blog/like/{{article.id}}'> Like </a>

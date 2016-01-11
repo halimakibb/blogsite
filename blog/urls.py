@@ -1,5 +1,8 @@
 from django.conf.urls import url
+from django.contrib.auth import views
+
 from . import views
+
 
 urlpatterns = [
     #url(r'', views.articles),
@@ -14,6 +17,7 @@ urlpatterns = [
     url(r'^logout/', views.logout),
     url(r'^logged_in/', views.loggedin),
     url(r'^logout/', views.logout),
+
     url(r'^register/', views.register),
     url(r'^register_success/', views.register_success),
     

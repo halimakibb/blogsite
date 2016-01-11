@@ -2,13 +2,25 @@
 
 {% load staticfiles %}
 
-{% block title %} Session language is: {{ session_language }} {% endblock title %}
+{% block title %} Home {% endblock title %}
 
 {% block sidebar %}
 
-<li class="current"><a href="#">Home</a></li>
+{% if name %}
+
+<p> Hi, {{ name }} </p>
+
+<b><li><a href = '/blog/index'>Home</a></li></b>
+<b><li><a href = '/blog/create'>Create Article</a></li></b>
+<b><li><a href = '/blog/logout'>Logout</a></li></b>
+
+{% else %}
+
+<b><li><a href = '/blog/index'>Home</a></li></b>
 <b><li><a href = '/blog/create'>Create Article</a></li></b>
 <b><li><a href = '/blog/login'>Login</a></li></b>
+
+{% endif %}
 
 {% endblock sidebar %}
 
@@ -18,9 +30,9 @@
 
 <article class="box post post-excerpt">
                                                         <header>
-                                                                
+                                                                {% autoescape off %}
                                                                 <h2><a href="/blog/get/{{ article.id }}">{{ article.title }}</a></h2>
-                                                                
+                                                                {% endautoescape %}
                                                         </header>
                                                         <div class="info">
 
@@ -29,7 +41,9 @@
                                                         </div>
                                                         <a href="#" class="image featured"><img src="{% static 'blog/images/pic01.jpg' %}" alt="" /></a>
                                                         <p>
+                                                        {% autoescape off %}
                                                                 {{ article.body|truncatewords:10 }}
+                                                        {% endautoescape %}
                                                         </p>
 
                                                 </article>

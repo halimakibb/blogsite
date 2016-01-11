@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
+<head>
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'blog/assets/js/tinymce/tinymce.min.js' %}"></script>
+<script>tinymce.init({ selector:'textarea' })</script>
+{% endblock %}
+</head>
+
+
 {% block sidebar %}
 <li><a href = '/blog/index/'> Cancel </a></li>
 {% endblock %}
