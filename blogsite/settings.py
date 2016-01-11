@@ -27,9 +27,9 @@ import dj_database_url
 SECRET_KEY = 'rm6p54a9%hn_pj7gwv@ix25&te!q(@nsbnu!&=cwz+ip30lf31'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 
 # Application definition
@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'blogsite.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blogsite',
-        'USER': 'postgres',
-        'PASSWORD': 'hardrock',
-    }
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'blogsite',
+        #'USER': 'postgres',
+        #'PASSWORD': 'hardrock',
+    #}
 }
 
 
@@ -140,7 +140,9 @@ MEDIA_URL = '/media/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 #
-#DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
